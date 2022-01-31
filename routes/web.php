@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function () {
+    return view('home');
 });
+
+Route::get('/registrar',[RegisterController::class,'create'])
+->name('registrar.index');
+
+Route::post('/registrar',[RegisterController::class,'store'])
+->name('registrar.store');
+
+Route::get('/ingresar',[SessionsController::class,'create'])
+->name('ingresar.index');
+
+Route::post('/ingresar',[SessionsController::class,'store'])
+->name('ingresar.store');
+
+Route::get('/cerrarSesion',[SessionsController::class,'destroy'])
+->name('ingresar.destroy');
