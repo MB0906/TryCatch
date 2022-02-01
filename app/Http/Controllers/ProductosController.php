@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalogo;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        //
+        $datosC=Catalogo::all();
+        $datos=Productos::all();
+            return view('catalogo',['productos'=>$datos, 'categorias'=>$datosC]);
     }
 
     /**
@@ -24,7 +27,9 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        $productos = Productos::all();
+        $categorias = Catalogo::all();
+        return view('admin.create',['productos'=>$productos, 'categorias'=>$categorias]);
     }
 
     /**
@@ -35,7 +40,45 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producto=[
+            'Nombre'=>'required|string|max:100',
+            'Descripcion'=>'required|string|max:100',
+            'Precio'=>'required',
+            'Imagen'=>'required|max:10000|mimes:jpg,jpeg,png',
+            'catalogo_id'=>'required'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Descripcion.required'=>'Una breve descripcion es necesaria',
+            'Precio.required'=>'Es requerido el precio para poder ingresar el producto',
+            'Imagen.required'=>'La imagen no esta seleccionada',
+            'catalogo_id.required'=>'Selecciona la categoria, si no creela.'
+        ];
+
+        $this->validate($request,$producto,$mensaje);
+
+        $datosProducto = request()->except('_token');
+
+            if($request->hasFile('Imagen')){
+                $datosProducto['Imagen']=$request->file('Imagen')->store('uploads','public');
+            }
+
+            Productos::insert($datosProducto);
+
+        return redirect('admin')->with('mensaje','Se ha registrado correctamente el producto');
+        /*$request->validate([
+            'title' => 'required|min:3'
+        ]);
+
+        $producto = new Productos();
+        $producto->Nombre = $request->Nombre;
+        $producto->Descripcion = $request->Descripcion;
+        $producto->Precio = $request->Precio;
+        $producto->title = $request->title;
+        $producto->categoria_id = $request->categoria_id;
+        $producto->save();
+
+        return redirect()->route('index')->with('success','Tarea creada correctamente');*/
     }
 
     /**
@@ -82,4 +125,6 @@ class ProductosController extends Controller
     {
         //
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Sessions;
 use Illuminate\Http\Request;
 
@@ -39,8 +40,13 @@ class SessionsController extends Controller
             return back()->withErrors([
                 'error'=> 'El email o la contraseña son incorrectas, intenta denuevo.'
             ]);
+        }else{
+            if(auth()->user()->rol=='admin'){
+                return redirect()->route('admin.index');
+            }else{
+               return redirect('/');
+            }
         }
-        return redirect('/');
     }
 
     public function show(Sessions $sessions)
