@@ -14,7 +14,8 @@ class CatalogoController extends Controller
      */
     public function index()
     {
-        return view('catalogo');
+        $datosC=Catalogo::all();
+        return view('catalogo.index',['categorias'=>$datosC]);
     }
 
     /**
@@ -48,7 +49,7 @@ class CatalogoController extends Controller
 
              Catalogo::insert($datosCatalogo);
 
-        return redirect('admin')->with('mensaje','Se ha registrado correctamente el producto');
+        return redirect('admin')->with('mensaje','Se ha registrado correctamente la categoria');
     }
 
     /**
@@ -59,7 +60,7 @@ class CatalogoController extends Controller
      */
     public function show(Catalogo $catalogo)
     {
-        //
+
     }
 
     /**
@@ -68,9 +69,10 @@ class CatalogoController extends Controller
      * @param  \App\Models\Catalogo  $catalogo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catalogo $catalogo)
+    public function edit($id)
     {
-        //
+        $categorias=Catalogo::find($id);
+        return view('catalogo.edit',['categoria'=>$categorias]);
     }
 
     /**
@@ -80,9 +82,21 @@ class CatalogoController extends Controller
      * @param  \App\Models\Catalogo  $catalogo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catalogo $catalogo)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=[
+            'nombre'=>'required|string|max:100'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+        $this->validate($request,$datos,$mensaje);
+
+        $datosCategoria = request()->except('_token','_method');
+
+        Catalogo::where('id','=',$id)->update($datosCategoria);
+
+        return redirect('/catalogoI')->with('mensaje','Se ha modificado correctamente la categoria');
     }
 
     /**
@@ -91,8 +105,10 @@ class CatalogoController extends Controller
      * @param  \App\Models\Catalogo  $catalogo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catalogo $catalogo)
+    public function destroy($id)
     {
-        //
+        Catalogo::destroy($id);
+
+        return redirect('/catalogoI')->with('mensaje-D','Se ha eliminado correctamente la categoria');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogo;
 use App\Models\Productos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductosController extends Controller
 {
@@ -48,10 +49,10 @@ class ProductosController extends Controller
             'catalogo_id'=>'required'
         ];
         $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'Descripcion.required'=>'Una breve descripcion es necesaria',
-            'Precio.required'=>'Es requerido el precio para poder ingresar el producto',
-            'Imagen.required'=>'La imagen no esta seleccionada',
+            'required'=>'El :attribute es requerido.',
+            'Descripcion.required'=>'Una breve descripcion es necesaria.',
+            'Precio.required'=>'Es requerido el precio para poder ingresar el producto.',
+            'Imagen.required'=>'La imagen no esta seleccionada.',
             'catalogo_id.required'=>'Selecciona la categoria, si no creela.'
         ];
 
@@ -66,19 +67,6 @@ class ProductosController extends Controller
             Productos::insert($datosProducto);
 
         return redirect('admin')->with('mensaje','Se ha registrado correctamente el producto');
-        /*$request->validate([
-            'title' => 'required|min:3'
-        ]);
-
-        $producto = new Productos();
-        $producto->Nombre = $request->Nombre;
-        $producto->Descripcion = $request->Descripcion;
-        $producto->Precio = $request->Precio;
-        $producto->title = $request->title;
-        $producto->categoria_id = $request->categoria_id;
-        $producto->save();
-
-        return redirect()->route('index')->with('success','Tarea creada correctamente');*/
     }
 
     /**
@@ -98,9 +86,11 @@ class ProductosController extends Controller
      * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Productos $productos)
+    public function edit($id)
     {
-        //
+        $producto=Productos::find($id);
+        $categorias=Catalogo::all();
+        return view('admin.edit',compact('producto'),compact('categorias'));
     }
 
     /**
@@ -110,9 +100,40 @@ class ProductosController extends Controller
      * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Productos $productos)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=[
+            'Nombre'=>'required|string|max:100',
+            'Descripcion'=>'required|string|max:100',
+            'Precio'=>'required',
+            'Imagen'=>'required|max:10000|mimes:jpg,jpeg,png',
+            'catalogo_id'=>'required'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Descripcion.required'=>'Una breve descripcion es necesaria',
+            'Precio.required'=>'Es requerido el precio para poder ingresar el producto',
+            'Imagen.required'=>'La imagen no esta seleccionada',
+            'catalogo_id.required'=>'Selecciona la categoria, si no creela.'
+        ];
+        if($request->hasFile('Imagen')){
+            $campos=['Imagen'=>'required|max:10000|mimes:jpg,jpeg,png'];
+            $mensaje=['Imagen.required'=>'El formato de la imagen no es jpg,jpeg o png'];
+        }
+
+        $this->validate($request,$datos,$mensaje);
+
+        $datosProducto = request()->except('_token','_method');
+
+        if($request->hasFile('Imagen')){
+            $producto=Productos::find($id);
+            Storage::delete('public/'.$producto->Foto);
+            $datosProducto['Imagen']=$request->file('Imagen')->store('uploads','public');
+        }
+
+        Productos::where('id','=',$id)->update($datosProducto);
+
+        return redirect('/productoI')->with('mensaje','Se ha modificado correctamente el producto');
     }
 
     /**
@@ -121,9 +142,17 @@ class ProductosController extends Controller
      * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Productos $productos)
+    public function destroy($id)
     {
-        //
+        $producto=Productos::find($id);
+
+        if(Storage::delete('public/'.$producto->Imagen)){
+
+            Productos::destroy($id);
+
+        }
+
+        return redirect('/productoI')->with('mensaje-D','Se ha eliminado correctamente el producto');
     }
 
 

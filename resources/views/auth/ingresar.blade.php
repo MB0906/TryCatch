@@ -7,11 +7,17 @@
             <div class="container">
                 <form method="POST" action="">
                 @csrf
-
+                    @if (session('mensaje'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss='alert'>&times;</button>
+                        <strong></strong> {{ session ('mensaje') }}.
+                    </div>
+                @endif
                     @error('error')
-
-                    <h6 class="alert alert-danger">{{ ($message) }}</h6>
-
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss='alert'>&times;</button>
+                        <strong>{{ ($message) }}</strong>
+                    </div>
                     @enderror
 
                     <div class="mb-3">

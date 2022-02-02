@@ -34,18 +34,29 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
+    public function store(Request $request){
 
-        $this->validate(request(),[
+        $datosU=User::all();
+        $usuario=[
             'nombre'=>'required|max:100',
-            'email'=>'required|max:250|email',
+            'email'=>'required|max:250|email|unique:users,email',
             'password'=>'required|max:100|confirmed'
-        ]);
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido.',
+            'email.required'=>'Es requerido el email para crear el usuario.',
+            'password.required'=>'Es requerida una contraseña para crear el usuario.'
+        ];
 
-        $users = User::create(request(['nombre','email','password']));
+        $this->validate($request,$usuario,$mensaje);
 
-        auth()->login($users);
-        return redirect('/');
+        $datosUsuario = request()->except('_token','password_confirmation');
+
+            User::insert($datosUsuario);
+            return redirect('/ingresar')->with('mensaje','Se ha creado correctamente el usuario');
+
+
+
     }
 
     /**
