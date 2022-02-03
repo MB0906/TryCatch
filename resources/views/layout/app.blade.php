@@ -22,9 +22,11 @@
             @if(auth()->check())
                 @if (auth()->user()->rol=='admin')
                     <li class="nav-item ">
-                        <a href="/admin"> Portal Admin </a></li>
+                        <a href="/admin"> Portal Admin </a>
+                    </li>
                     <li class="nav-item ">
-                        <a href="{{ route('producto.index') }}"> Catalogo</a></li>
+                        <a href="{{ route('producto.index') }}"> Catalogo</a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link">Bienvenido <b>{{ auth()->user()->nombre}}</b> </a>
                     </li>
@@ -41,12 +43,14 @@
                 <li>
                     <a href="{{ route('contacto.index') }}"> Contactanos </a>
                 </li>
+                <div style="float:right">
                 <li class="nav-item ">
                     <a class="nav-link">Bienvenido <b>{{ auth()->user()->nombre}}</b> </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('ingresar.destroy') }}">Cerrar Sesión</a>
                 </li>
+                </div>
                 @endif
             @else
                 <li><a href="/"> Inicio </a></li>

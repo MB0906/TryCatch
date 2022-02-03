@@ -52,7 +52,7 @@ class RegisterController extends Controller
 
         $datosUsuario = request()->except('_token','password_confirmation');
 
-            User::insert($datosUsuario);
+            User::create($datosUsuario);
             return redirect('/ingresar')->with('mensaje','Se ha creado correctamente el usuario');
 
 
