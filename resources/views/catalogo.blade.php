@@ -28,8 +28,6 @@
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
                                             <th>Precio</th>
-                                            <th>Editar</th>
-                                            <th>Borrar</th>
                                         </tr>
                                         </thead>
                                             @foreach ($productos as $producto)
@@ -39,7 +37,7 @@
                                                             <td><img src="{{ asset('storage').'/'.$producto->Imagen }}" alt="100px" width="150px" class="img-thumbnail img-fluid"></td>
                                                             <td>{{ $producto->Nombre }}</td>
                                                             <td>{{ $producto->Descripcion }}</td>
-                                                            <td>{{ $producto->Precio }}</td>
+                                                            <td>${{ $producto->Precio }}</td>
                                                             @if (auth()->check())
                                                                 @if (auth()->user()->rol=='admin')
                                                                     <td><a class="btn btn-primary"  href="{{ url('/producto/'.$producto->id.'/edit') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

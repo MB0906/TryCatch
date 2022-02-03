@@ -18,13 +18,13 @@
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="name" class="">Tu Nombre</label>
-                                    <input type="text" id="name" name="name" class="form-control" required>
+                                    <input type="text" id="name" name="name" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="email" class="">Tu Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <input type="email" id="email" name="email" class="form-control" required required autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
                                     <label for="subject" class="" required>Encabezado</label>
-                                    <input type="text" id="subject" name="subject" class="form-control" required>
+                                    <input type="text" id="subject" name="subject" class="form-control" required required autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="col-md-12">
                                 <div class="md-form">
                                     <label for="message">Tu Mensaje</label>
-                                    <textarea id="caja" class="form-control" rows="7" cols="102" minlength="50" maxlength="300" required></textarea><br />
+                                    <textarea id="caja" class="form-control" rows="7" cols="102" minlength="50" maxlength="300" required required autocomplete="off"></textarea><br />
                                     <p class="error-msg1">Caracteres Maximos Alcanzados</p>
                                     <p class="error-msg2">Caracteres Minimos Alcanzados</p>
                                     <p class="float-right"><spa id="count">0</spa>/300</p>

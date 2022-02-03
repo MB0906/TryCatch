@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogo;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 
 class CatalogoController extends Controller
@@ -107,8 +108,12 @@ class CatalogoController extends Controller
      */
     public function destroy($id)
     {
-        Catalogo::destroy($id);
 
+        $catalogo = Catalogo::find($id);
+        $catalogo ->productos()->each(function($productos){
+            $productos->delete();
+        });
+        $catalogo -> delete();
         return redirect('/catalogoI')->with('mensaje-D','Se ha eliminado correctamente la categoria');
     }
 }

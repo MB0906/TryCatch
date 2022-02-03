@@ -18,15 +18,15 @@
                     </div>
                 @endif
                 <label>Ingrese el nombre del producto</label>
-                    <input class="form-control" type="text" name="Nombre" id="Nombre" value="{{ isset($producto->Nombre)?$producto->Nombre:old('Nombre') }}">
+                    <input class="form-control" type="text" name="Nombre" id="Nombre" value="{{ isset($producto->Nombre)?$producto->Nombre:old('Nombre') }}" autocomplete="off">
                     <br/><br/>
 
                 <label>Ingrese una breve descripción del producto</label>
-                    <textarea class="form-control" type="text" name="Descripcion" id="Descripcion" value="{{ isset($producto->Descripcion)?$producto->Descripcion:old('Descripcion') }}"></textarea>
+                    <textarea class="form-control" type="text" name="Descripcion" id="Descripcion" value="{{ isset($producto->Descripcion)?$producto->Descripcion:old('Descripcion') }}" autocomplete="off"></textarea>
                 <br/><br/>
 
                 <label>Ingrese el valor del producto</label>
-                    <input class="form-control" type="int" name="Precio" id="Precio" value="{{ isset($producto->Precio)?$producto->Precio:old('Precio') }}">
+                    <input class="form-control" type="int" name="Precio" id="Precio" value="{{ isset($producto->Precio)?$producto->Precio:old('Precio') }}" autocomplete="off">
                 <br/><br/>
 
                 <label>Ingrese la imagen del producto</label>

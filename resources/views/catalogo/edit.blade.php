@@ -18,7 +18,7 @@
                 </div>
                 @endif
             <label>Ingrese el nuevo nombre del la categoria</label>
-                <input class="form-control" type="text" name="nombre" id="nombre" value="{{ isset($categoria->Nombre)?$categoria->nombre:old('nombre') }}">
+                <input autocomplete="off" class="form-control" type="text" name="nombre" id="nombre" value="{{ isset($categoria->nombre)?$categoria->nombre:old('nombre') }}">
             <br/><br/>
             <div class="row m-0 text-center align-items-center justify-content-center">
                 <div class="col-auto">

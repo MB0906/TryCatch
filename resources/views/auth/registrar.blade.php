@@ -9,7 +9,7 @@
                 @csrf
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Ingrese un nombre de usuario</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan Pedro de la paz">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan Pedro de la paz" autocomplete="off">
                     </div>
                     @error('nombre')
                         <div class="alert alert-danger alert-dismissable">
@@ -19,7 +19,7 @@
                     @enderror
                         <div class="mb-3">
                             <label for="email" class="form-label">Ingrese su correo electronico</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Juanpedrodelapaz@gmail.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Juanpedrodelapaz@gmail.com" autocomplete="off">
                         </div>
                     @error('email')
                         <div class="alert alert-danger alert-dismissable">
@@ -29,12 +29,12 @@
                     @enderror
                     <div class="mb-3">
                         <label for="password" class="form-label">Ingrese una contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="********">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="********" autocomplete="off">
                     </div>
 
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="********">
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="********" autocomplete="off">
                     </div>
                     @error('password')
                         <div class="alert alert-danger alert-dismissable">

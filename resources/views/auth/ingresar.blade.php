@@ -22,11 +22,11 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Ingrese su correo electronico</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Juanpedrodelapaz@gmail.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Juanpedrodelapaz@gmail.com" autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Ingrese su contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="********">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="********" autocomplete="off">
                     </div>
                     <br/>
                     <div class="row m-0 text-center align-items-center justify-content-center">

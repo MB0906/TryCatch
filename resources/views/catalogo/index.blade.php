@@ -46,6 +46,11 @@
                                 </tbody>
                             </table>
                 @endforeach
+                <div class="row m-0 text-center align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <a  class=" btn btn-primary  " href="{{ url('/admin') }}">Regresar</a>
+                    </div>
+                </div>
                 @else
                 <div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss='alert'>&times;</button>

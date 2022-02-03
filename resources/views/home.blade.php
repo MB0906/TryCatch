@@ -25,9 +25,9 @@
             <h3>Articulos Nuevos</h3>
             <h4> Tarjeta de video 3080ti</h4>
                 <img src="{{URL::asset('img/3080ti.jpg')}}" width="100">
-            <p><a href="Catalogo.php">Ver catalogo</a></p>
+            <p><a href="{{ route('producto.index') }}">Ver catalogo</a></p>
             <h4> Tarjeta de video 3060ti</h4>
                 <img src="{{URL::asset('img/3060ti.jpg')}}" width="100">
-            <p><a href="Catalogo.php">Ver catalogo</a></p>
+            <p><a href="{{ route('producto.index') }}">Ver catalogo</a></p>
         </aside>
     @endsection

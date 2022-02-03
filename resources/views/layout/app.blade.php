@@ -17,51 +17,57 @@
   <body>
     <div id="Contenedor">
         <header> <h1> TryCatch™ </h1> </header>
-        <nav>
+        <nav style="text-decoration: none;">
             <ul>
             @if(auth()->check())
                 @if (auth()->user()->rol=='admin')
                     <li class="nav-item ">
-                        <a href="/admin"> Portal Admin </a>
+                        <a class="nav-link" href="/admin"> Portal Admin </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="{{ route('producto.index') }}"> Catalogo</a>
+                        <a class="nav-link" href="{{ route('producto.index') }}"> Catalogo</a>
                     </li>
+                    <div style="float:right">
+                        <li class="nav-item ">
+                            <a class="nav-link">Bienvenido <b>{{ auth()->user()->nombre}}</b> </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('ingresar.destroy') }}">Cerrar Sesión</a>
+                        </li>
+                    </div>
+                @else
+                <li>
+                    <a href="/"> Inicio </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('producto.index') }}"> Catalogo</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('contacto.index') }}"> Contactanos </a>
+                </li>
+                <div style="float:right">
                     <li class="nav-item ">
                         <a class="nav-link">Bienvenido <b>{{ auth()->user()->nombre}}</b> </a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('ingresar.destroy') }}">Cerrar Sesión</a>
                     </li>
-                @else
-                <li>
-                    <a href="/"> Inicio </a>
-                </li>
-                <li>
-                    <a href="{{ route('producto.index') }}"> Catalogo</a>
-                </li>
-                <li>
-                    <a href="{{ route('contacto.index') }}"> Contactanos </a>
-                </li>
-                <div style="float:right">
-                <li class="nav-item ">
-                    <a class="nav-link">Bienvenido <b>{{ auth()->user()->nombre}}</b> </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('ingresar.destroy') }}">Cerrar Sesión</a>
-                </li>
                 </div>
                 @endif
             @else
-                <li><a href="/"> Inicio </a></li>
-                <li><a href="{{ route('producto.index') }}"> Catalogo</a></li>
-                <li><a href="{{ route('contacto.index') }}"> Contactanos </a></li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('ingresar.index') }}">Iniciar Sesión</a>
+                <li><a class="nav-link" href="/"> Inicio </a></li>
+                <li><a class="nav-link" href="{{ route('producto.index') }}"> Catalogo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('registrar.index') }}">Registrarse</a>
+                <li><a class="nav-link" href="{{ route('contacto.index') }}"> Contactanos </a>
                 </li>
+                <div style="float:right">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('ingresar.index') }}">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('registrar.index') }}">Registrarse</a>
+                    </li>
+                </div>
 
             @endif
             </ul>

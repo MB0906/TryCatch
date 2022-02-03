@@ -17,7 +17,7 @@
                 </div>
                 @endif
             <label>Ingrese el nombre del la categoria</label>
-                <input class="form-control" type="text" name="nombre" id="nombre" value="{{ isset($categoria->Nombre)?$categoria->nombre:old('nombre') }}">
+                <input class="form-control" type="text" name="nombre" id="nombre" value="{{ isset($categoria->Nombre)?$categoria->nombre:old('nombre') }}" autocomplete="off">
             <br/><br/>
             <div class="row m-0 text-center align-items-center justify-content-center">
                 <div class="col-auto">
